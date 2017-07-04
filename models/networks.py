@@ -26,7 +26,7 @@ def get_norm_layer(norm_type='instance'):
     elif norm_type == 'instance':
         norm_layer = functools.partial(nn.InstanceNorm2d, affine=False)
     else:
-        print('normalization layer [%s] is not found' % norm)
+        raise ValueError('normalization layer [{0}] is not found'.format(norm_type))
     return norm_layer
 
 
