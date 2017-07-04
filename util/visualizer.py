@@ -6,7 +6,7 @@ from . import util
 from . import html
 
 
-class Visualizer():
+class Visualizer(object):
     def __init__(self, opt):
         # self.opt = opt
         self.display_id = opt.display_id
