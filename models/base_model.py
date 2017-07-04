@@ -2,7 +2,7 @@ import os
 import torch
 
 
-class BaseModel():
+class BaseModel(object):
     def name(self):
         return 'BaseModel'
 
