@@ -3,7 +3,7 @@ import os
 from util import util
 
 
-class BaseOptions():
+class BaseOptions(object):
     def __init__(self):
         self.parser = argparse.ArgumentParser()
         self.initialized = False
