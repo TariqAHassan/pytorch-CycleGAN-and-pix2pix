@@ -46,8 +46,7 @@ class AlignedDataset(BaseDataset):
             A = A.index_select(2, idx)
             B = B.index_select(2, idx)
 
-        return {'A': A, 'B': B,
-                'A_paths': AB_path, 'B_paths': AB_path}
+        return {'A': A, 'B': B, 'A_paths': AB_path, 'B_paths': AB_path}
 
     def __len__(self):
         return len(self.AB_paths)
