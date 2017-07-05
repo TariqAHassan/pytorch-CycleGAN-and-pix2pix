@@ -1,6 +1,4 @@
-import numpy as np
 import torch
-import os
 from collections import OrderedDict
 from torch.autograd import Variable
 import itertools
@@ -8,10 +6,45 @@ import util.util as util
 from util.image_pool import ImagePool
 from .base_model import BaseModel
 from . import networks
-import sys
 
 
 class CycleGANModel(BaseModel):
+    def __init__(self):
+        super().__init__()
+        self.input_A = None
+        self.input_B = None
+        self.netG_A = None
+        self.netG_B = None
+        self.netD_A = None
+        self.netD_B = None
+        self.old_lr = None
+        self.fake_A_pool = None
+        self.fake_B_pool = None
+        self.criterionGAN = None
+        self.criterionCycle = None
+        self.criterionIdt = None
+        self.optimizer_G = None
+        self.optimizer_D_A = None
+        self.optimizer_D_B = None
+        self.image_paths = None
+        self.real_A = None
+        self.real_B = None
+        self.fake_B = None
+        self.fake_A = None
+        self.rec_A = None
+        self.rec_B = None
+        self.loss_D_A = None
+        self.loss_D_B = None
+        self.idt_A = None
+        self.idt_B = None
+        self.loss_idt_A = None
+        self.loss_idt_B = None
+        self.loss_G_A = None
+        self.loss_G_B = None
+        self.loss_cycle_A = None
+        self.loss_cycle_B = None
+        self.loss_G = None
+
     def name(self):
         return 'CycleGANModel'
 
@@ -147,7 +180,8 @@ class CycleGANModel(BaseModel):
         self.rec_B = self.netG_A.forward(self.fake_A)
         self.loss_cycle_B = self.criterionCycle(self.rec_B, self.real_B) * lambda_B
         # combined loss
-        self.loss_G = self.loss_G_A + self.loss_G_B + self.loss_cycle_A + self.loss_cycle_B + self.loss_idt_A + self.loss_idt_B
+        self.loss_G = (self.loss_G_A + self.loss_G_B + self.loss_cycle_A +
+                       self.loss_cycle_B + self.loss_idt_A + self.loss_idt_B)
         self.loss_G.backward()
 
     def optimize_parameters(self):

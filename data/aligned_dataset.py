@@ -8,6 +8,14 @@ from PIL import Image
 
 
 class AlignedDataset(BaseDataset):
+    def __init__(self):
+        super().__init__()
+        self.opt = None
+        self.root = None
+        self.dir_AB = None
+        self.AB_paths = None
+        self.transform = None
+
     def initialize(self, opt):
         self.opt = opt
         self.root = opt.dataroot
@@ -15,7 +23,7 @@ class AlignedDataset(BaseDataset):
 
         self.AB_paths = sorted(make_dataset(self.dir_AB))
 
-        assert(opt.resize_or_crop == 'resize_and_crop')
+        assert (opt.resize_or_crop == 'resize_and_crop')
 
         transform_list = [transforms.ToTensor(),
                           transforms.Normalize((0.5, 0.5, 0.5),
@@ -35,10 +43,8 @@ class AlignedDataset(BaseDataset):
         w_offset = random.randint(0, max(0, w - self.opt.fineSize - 1))
         h_offset = random.randint(0, max(0, h - self.opt.fineSize - 1))
 
-        A = AB[:, h_offset:h_offset + self.opt.fineSize,
-               w_offset:w_offset + self.opt.fineSize]
-        B = AB[:, h_offset:h_offset + self.opt.fineSize,
-               w + w_offset:w + w_offset + self.opt.fineSize]
+        A = AB[:, h_offset:h_offset + self.opt.fineSize, w_offset:w_offset + self.opt.fineSize]
+        B = AB[:, h_offset:h_offset + self.opt.fineSize, w + w_offset:w + w_offset + self.opt.fineSize]
 
         if (not self.opt.no_flip) and random.random() < 0.5:
             idx = [i for i in range(A.size(2) - 1, -1, -1)]

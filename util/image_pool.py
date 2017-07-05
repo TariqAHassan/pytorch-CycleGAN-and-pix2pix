@@ -1,11 +1,10 @@
 import random
 import numpy as np
 import torch
-from pdb import set_trace as st
 from torch.autograd import Variable
 
 
-class ImagePool():
+class ImagePool(object):
     def __init__(self, pool_size):
         self.pool_size = pool_size
         if self.pool_size > 0:

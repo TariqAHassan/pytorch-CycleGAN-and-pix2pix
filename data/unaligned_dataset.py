@@ -3,11 +3,22 @@ import torchvision.transforms as transforms
 from data.base_dataset import BaseDataset
 from data.image_folder import make_dataset
 from PIL import Image
-import PIL
-from pdb import set_trace as st
 
 
 class UnalignedDataset(BaseDataset):
+    def __init__(self):
+        super().__init__()
+        self.opt = None
+        self.root = None
+        self.dir_AB = None
+        self.dir_A = None
+        self.dir_B = None
+        self.A_paths = None
+        self.B_paths = None
+        self.A_size = None
+        self.B_size = None
+        self.transform = None
+
     def initialize(self, opt):
         self.opt = opt
         self.root = opt.dataroot

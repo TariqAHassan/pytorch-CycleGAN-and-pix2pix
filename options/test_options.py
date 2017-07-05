@@ -2,6 +2,10 @@ from .base_options import BaseOptions
 
 
 class TestOptions(BaseOptions):
+    def __init__(self):
+        super().__init__()
+        self.isTrain = None
+
     def initialize(self):
         BaseOptions.initialize(self)
         self.parser.add_argument('--ntest', type=int, default=float("inf"), help='# of test examples.')

@@ -119,10 +119,8 @@ class Visualizer(object):
         name = os.path.splitext(short_path)[0]
 
         webpage.add_header(name)
-        ims = []
-        txts = []
-        links = []
 
+        ims, txts, links = list(), list(), list()
         for label, image_numpy in visuals.items():
             image_name = '%s_%s.png' % (name, label)
             save_path = os.path.join(image_dir, image_name)

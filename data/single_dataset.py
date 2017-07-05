@@ -6,6 +6,15 @@ from PIL import Image
 
 
 class SingleDataset(BaseDataset):
+    def __init__(self):
+        super().__init__()
+        self.opt = None
+        self.root = None
+        self.dir_AB = None
+        self.dir_A = None
+        self.A_paths = None
+        self.transform = None
+
     def initialize(self, opt):
         self.opt = opt
         self.root = opt.dataroot

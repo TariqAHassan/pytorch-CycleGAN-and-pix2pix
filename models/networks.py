@@ -1,9 +1,8 @@
 import torch
-import torch.nn as nn
-from torch.nn import init
 import functools
-from torch.autograd import Variable
 import numpy as np
+import torch.nn as nn
+from torch.autograd import Variable
 
 
 ###############################################################################
@@ -140,8 +139,8 @@ class GANLoss(nn.Module):
 # Code and idea originally from Justin Johnson's architecture.
 # https://github.com/jcjohnson/fast-neural-style/
 class ResnetGenerator(nn.Module):
-    def __init__(self, input_nc, output_nc, ngf=64, norm_layer=nn.BatchNorm2d, use_dropout=False, n_blocks=6,
-                 gpu_ids=[]):
+    def __init__(self, input_nc, output_nc, ngf=64, norm_layer=nn.BatchNorm2d,
+                 use_dropout=False, n_blocks=6, gpu_ids=[]):
         assert (n_blocks >= 0)
         super(ResnetGenerator, self).__init__()
         self.input_nc = input_nc

@@ -2,6 +2,10 @@ from .base_options import BaseOptions
 
 
 class TrainOptions(BaseOptions):
+    def __init__(self):
+        super().__init__()
+        self.isTrain = None
+
     def initialize(self):
         BaseOptions.initialize(self)
         self.parser.add_argument('--display_freq', type=int, default=100, help='frequency of showing training results on screen')

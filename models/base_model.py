@@ -3,6 +3,14 @@ import torch
 
 
 class BaseModel(object):
+    def __init__(self):
+        self.opt = None
+        self.gpu_ids = None
+        self.isTrain = None
+        self.Tensor = None
+        self.save_dir = None
+        self.input = None
+
     def name(self):
         return 'BaseModel'
 
